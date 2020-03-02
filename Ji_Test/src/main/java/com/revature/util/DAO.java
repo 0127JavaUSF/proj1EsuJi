@@ -18,7 +18,7 @@ public class DAO {
 		try{
 			do {
 			//jdbc:postgresql://host:port/database_name
-			db = DriverManager.getConnection("jdbc:postgresql://database-1.cfgsjckjokdt.us-east-2.rds.amazonaws.com:5432/postgres","jkong20", "1234" );
+			db = DriverManager.getConnection();
 			}while (db == null);
 		}
 		catch (SQLException ex) {
