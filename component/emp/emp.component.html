@@ -1,0 +1,41 @@
+<div class="topnav">   
+    <a (click)="empHome()"> Home </a>
+    <a (click)="reqHome()"> Request</a>
+    <a (click)="logOut()"> Logout</a>
+</div> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+  <h2>Hello, {{name}}</h2>
+  <h2>Employee Requests</h2>
+
+
+  <table class="w3-table-all">
+    <tr>
+        <th>ID</th>        
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Submission Time</th>
+        <th>Approved Time</th>
+        <th>Receipt</th>
+    </tr>
+    <tr *ngFor="let info of reimbArr">
+   
+        <td>{{info.reimb_id}}</td>
+        <td>{{info.reimb_desc}}</td>
+        <td>{{info.reimb_amount}}</td>
+        <td>{{info.reimb_status}}</td>
+        <td>{{info.reimb_expType}}</td>
+        <td>{{info.reimb_Sub_Time}}</td>
+        <td>{{info.reimb_Sub_Time}}</td>
+        <td>{{info.rimb_rec}}</td>
+    </tr>
+  </table>
+</div>
+
+</body>

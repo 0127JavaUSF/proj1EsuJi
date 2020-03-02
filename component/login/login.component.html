@@ -1,0 +1,22 @@
+
+<div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="userName" />
+    <label for="psw"><b>Password</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="passWord" />
+
+    <button (click) = "submit()">Submit</button>
+
+  <div *ngIf="verify === 0">Please Use Correct Information.</div> 
+</div>
+  <!-- 
+  <p>{{checkLogin}}</p>
+  <p>login works!</p>
+  <p>
+  
+  <p>
+  
+  </p>
+  
+  <button (click) = "submit()">Submit</button>
+  <div *ngIf="verify === 1">Content to render when condition is true.</div> -->

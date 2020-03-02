@@ -1,0 +1,23 @@
+<div class="topnav">   
+    <a (click)="empHome()"> Home </a>
+    <a (click)="reqHome()"> Request</a>
+    <a (click)="logOut()"> Logout</a>
+</div> 
+
+<div class="container">
+    <label for="uname"><b>Amount</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="Amount" />
+    <label for="uname"><b>Details</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="Description" />
+    <label for="uname"><b>Picture</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="Url" />
+    <label for="types"><b>Type</b></label>
+        <select id="types" [(ngModel)]="type">
+            <option value="1">LODGING</option>
+            <option value="2">TRAVEL</option>
+            <option value="3">FOOD</option>
+            <option value="4">OTHER</option>
+        </select>
+        
+    <button type = "button" (click) = "submit()">Submit</button>
+</div>

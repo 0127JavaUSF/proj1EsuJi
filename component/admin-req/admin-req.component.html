@@ -1,0 +1,17 @@
+<div class="topnav">   
+    <a (click)="adHome()"> Home </a>
+    <a (click)="reqHome()"> Request</a>
+    <a (click)="logOut()"> Logout</a>
+</div> 
+
+<div class="container">
+    <label for="uname"><b>Reimbursement ID</b></label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="id" />
+    <label for="types"><b>Decision</b></label>
+        <select id="types" [(ngModel)]="types">
+            <option value="2">APPROVED</option>
+            <option value="1">DENIED</option>
+        </select>
+    <button type = "button" (click) = "submit()">Submit</button>
+
+</div>
