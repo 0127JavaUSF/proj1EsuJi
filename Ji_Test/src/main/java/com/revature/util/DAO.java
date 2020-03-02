@@ -91,12 +91,13 @@ public class DAO {
 	}
 	
 
-	public int alterQuery(int parseInt, String desc, int parseInt2, String url) {
+	public int alterQuery(int parseInt, String desc, int parseInt2, int parseInt3, String url) {
 		try {
 			prepState.setInt(1, parseInt);
 			prepState.setString(2, desc);
 			prepState.setInt(3, parseInt2);
-			prepState.setString(4, url);
+			prepState.setInt(4, parseInt3);
+			prepState.setString(5, url);
 			
 
 			return prepState.executeUpdate();

@@ -1,9 +1,10 @@
 package com.revature.util;
 
 public class loginResponse{
-	public String username;
-	public String password;
-	public String confirm;
+	private String username;
+	private  String password;
+	private String confirm;
+	private String name;
 	
 	public loginResponse(String fName, String lName, String Confirm) {
 		username = fName;
@@ -33,6 +34,14 @@ public class loginResponse{
 
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

@@ -21,14 +21,14 @@ public class AlterImpl implements Process{
 		return " ";
 	}
 	
-	public String process(Cookie cookie, String amount, String desc, String url) {
+	public String process(Cookie cookie, String amount, String desc, String types,String url) {
 		String username = cookie.getName();
 		String prepQuery;
 
 		
-		prepQuery = "INSERT INTO ers_reimbursement VALUES(DEFAULT, ? , DEFAULT, NULL, ? , ? , NULL, DEFAULT, NULL, ? )";
+		prepQuery = "INSERT INTO ers_reimbursement VALUES(DEFAULT, ? , DEFAULT, NULL, ? , ? ,NULL , DEFAULT, ?, ? )";
 		db.setPreparedStatement(prepQuery);
-		int result = db.alterQuery(Integer.parseInt(amount),desc, Integer.parseInt(username), url);
+		int result = db.alterQuery(Integer.parseInt(amount),desc, Integer.parseInt(username), Integer.parseInt(types),url);
 		
 		if(result < 1) {
 			System.out.println("Insertion Failed");

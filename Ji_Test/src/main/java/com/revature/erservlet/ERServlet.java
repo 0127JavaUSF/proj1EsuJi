@@ -8,7 +8,9 @@ import com.revature.processImpl.LoginProcessImpl;
 import com.revature.util.SuccessOrFail;
 import com.revature.util.loginResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.JSONObject;
 
 
@@ -83,7 +86,6 @@ public class ERServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		//getting the cookie
         Cookie[] cookies = request.getCookies();
 
@@ -92,6 +94,8 @@ public class ERServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 
+
+		System.out.println(request.getParameter("reqType"));
 		//checking if client logged in the last 10 minutes
         
 		switch(reqType) {
@@ -103,6 +107,10 @@ public class ERServlet extends HttpServlet {
 				}
 				
 				else {
+					soff.setusername(cookies[0].getValue());
+					soff.setpassword(cookies[0].getName());
+					String name = employeeTransaction.getName(cookies[0].getValue());
+					soff.setName(name);
 					soff.setConfirm("true");
 					json2Send = gson.toJson(soff);
 				}
@@ -111,6 +119,9 @@ public class ERServlet extends HttpServlet {
 				break;
 				
 			case 1:
+				
+
+				System.out.println("yolo");
 				String username = request.getParameter("user");
 				String password = request.getParameter("pass");
 				
@@ -118,7 +129,6 @@ public class ERServlet extends HttpServlet {
 				returnVal = processTransaction.process(username, password);
 				
 				if(!returnVal.equals("no")) {
-					String cookID = "Login";
 					Cookie cookie = new Cookie(processTransaction.getRoleID(),processTransaction.getEmpID());
 					cookie.setMaxAge(10 * 60);
 					response.addCookie(cookie);
@@ -128,7 +138,8 @@ public class ERServlet extends HttpServlet {
 				break;
 			
 			case 2:
-				returnVal = employeeTransaction.process("2","2");
+				returnVal = employeeTransaction.process(cookies[0].getName(),cookies[0].getValue());
+				System.out.println(returnVal);
 				response.getWriter().print(returnVal);
 				break;
 				
@@ -139,7 +150,17 @@ public class ERServlet extends HttpServlet {
 					response.addCookie(e);
 				}
 				break;
+			case 4://Integer amount, String desc, String url
+				returnVal = alterTransaction.process(cookies[0],request.getParameter("reimb_amount"), request.getParameter("reimb_description"), request.getParameter("reimb_type_id"),request.getParameter("reimb_recept"));
+				response.getWriter().print(returnVal);
+				break;
+				
+			case 5://Cookie cookie, Integer id, String status
 
+				System.out.println("its getting here 22 ");
+				returnVal = alterTransaction.process(request.getParameter("reimb_id"), request.getParameter("reimb_status"));
+				response.getWriter().print(returnVal);
+				break;
 			default:
 				break;
 		
@@ -156,12 +177,12 @@ public class ERServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int type = 0;
-
+		System.out.println("asdfasdfasdfasdfasdfasdf");
 		//getting the cookie
         Cookie[] cookies = request.getCookies();
         int reqType = Integer.parseInt(request.getParameter("reqType"));
 		String returnVal = " ";
-
+		System.out.println(reqType);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
@@ -182,17 +203,7 @@ public class ERServlet extends HttpServlet {
 					response.getWriter().print(json2Send);
 				break;
 
-			case 1://Integer amount, String desc, String url
-				returnVal = alterTransaction.process(cookies[0],request.getParameter("reimb_amount"), request.getParameter("reimb_description"), request.getParameter("reimb_recept"));
-				response.getWriter().print(returnVal);
-				break;
-				
-			case 2://Cookie cookie, Integer id, String status
 
-				System.out.println("its getting here 22 ");
-				returnVal = alterTransaction.process(request.getParameter("reimb_id"), request.getParameter("reimb_status"));
-				response.getWriter().print(returnVal);
-				break;
 				
 			default:
 				break;

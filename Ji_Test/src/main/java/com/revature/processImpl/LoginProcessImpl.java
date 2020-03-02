@@ -26,11 +26,13 @@ public class LoginProcessImpl implements Process{
 	public String process(String user, String pass) {
 		
 		String confirm = "no";
-
+		System.out.println(user);
+		System.out.println(pass);
 		String userHash = Hashing.sha1().hashString(user, StandardCharsets.UTF_8).toString();
 		String passHash = Hashing.sha1().hashString(pass, StandardCharsets.UTF_8).toString();
-		
-		
+
+		System.out.println(userHash + " " + passHash);
+
 		String query = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?";
 		
 		db.setPreparedStatement(query);
@@ -40,6 +42,8 @@ public class LoginProcessImpl implements Process{
 			if(result.next()) {
 				empID = result.getString("ers_user_id").toString();
 				roleID = result.getString("user_role_id").toString();
+				System.out.println(empID + " " + roleID);
+			
 				storage = new loginResponse(result.getString("ers_user_id"), result.getString("user_role_id"), "yes");
 				String gson = new Gson().toJson(storage);
 				
