@@ -39,6 +39,8 @@ public class ERServlet extends HttpServlet {
 	 * @throws ServletException
 	 * @see HttpServlet#HttpServlet()
 	 */
+	
+	
 
 	public void init() throws ServletException {
 		
@@ -98,6 +100,10 @@ public class ERServlet extends HttpServlet {
 		System.out.println(request.getParameter("reqType"));
 		//checking if client logged in the last 10 minutes
         
+		if(cookies == null && reqType != 1) {
+			reqType = 0;
+		}
+		
 		switch(reqType) {
 			case 0: 
 				loginResponse soff = new loginResponse("a", "a" ,"false");
